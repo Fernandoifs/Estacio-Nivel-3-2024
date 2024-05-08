@@ -5,7 +5,7 @@ import java.sql.*;
 public class ConectorBD {
 
     private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=loja;encrypt=true;trustServerCertificate=true;";
-    private static final String USUARIO = "sa"; //sa
+    private static final String USUARIO = "sa";
     private static final String SENHA = "loja";
 
     public static Connection getConnection() throws SQLException {
