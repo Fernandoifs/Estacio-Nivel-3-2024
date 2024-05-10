@@ -132,7 +132,56 @@ public class CadastroBDTeste {
             default -> System.out.println("Opção inválida.");
         }
 }
-       private static void alterarPessoaFisica() {
+       private static void alterarPessoaFisica() { //adicionar a partir daqui
+            PessoaFisica pessoaFisica = getId(id);
+            if (pessoaFisica != null) {
+                exibirPorId(pessoaFisica);
+
+                System.out.println("Insira os dados...");
+                System.out.println("Nome:");
+                String novoNome = scanner.nextLine();
+                System.out.println("Logradouro:");
+                String novoLogradouro = scanner.nextLine();
+                System.out.println("Cidade:");
+                int novaCidade = scanner.nextInt();
+                System.out.println("Estado:");
+                int novaEstado = scanner.nextInt();
+                System.out.println("Telefone:");
+                int novaTelefone = scanner.nextInt();
+                System.out.println("Cpf:");
+                int novaCpf = scanner.nextInt();
+                scanner.nextLine();
+
+                pessoaFisica.setNome(novoNome);
+                pessoaFisica.setLogradouro(novoLogradouro);
+                pessoaFisica.setCidade(novaCidade);
+                pessoaFisica.setEstado(novaEstado);
+                pessoaFisica.setTelefone(novaTelefone);
+                pessoaFisica.setCidade(novaCidade);
+
+                System.out.println("Pessoa Física alterada com sucesso!");
+            } else {
+                System.out.println("Pessoa Física não encontrada com o ID informado.");
+            }
+        } else if (tipoPessoa.equals("J")) {
+            PessoaJuridica pessoaJuridica = repoJuridica.obter(id);
+            if (pessoaJuridica != null) {
+                exibirOpcao(pessoaJuridica);
+
+                System.out.println("Insira os dados...");
+                System.out.println("Nome:");
+                String novoNome = scanner.nextLine();
+                System.out.println("CNPJ:");
+                String novoCnpj = scanner.nextLine();
+
+                pessoaJuridica.setNome(novoNome);
+                pessoaJuridica.setCnpj(novoCnpj);
+
+                System.out.println("Pessoa Jurídica alterada com sucesso!");
+            } else {
+                System.out.println("Pessoa Jurídica não encontrada com o ID informado.");
+            }
+        }
        }
        private static void alterarPessoaJuridica() {
        }
@@ -157,7 +206,7 @@ public class CadastroBDTeste {
        private static void excluirPessoaJuridica() {
        }
 
-    private static void exibirPorIdOpcao(Scanner scanner) {
+    private static void exibirOpcao(Scanner scanner) {
         System.out.println("Digite o ID do registro que deseja alterar:");
         int id = scanner.nextInt();
         scanner.nextLine();
