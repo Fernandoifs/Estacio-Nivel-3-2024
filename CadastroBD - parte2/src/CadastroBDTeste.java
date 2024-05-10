@@ -6,56 +6,52 @@ import java.util.Scanner;
 public class CadastroBDTeste {
 
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            int opcao;
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
 
-            do {
-                exibirMenu();
+        do {
+            System.out.println("==============================");
+            System.out.println("1 - Incluir");
+            System.out.println("2 - Alterar");
+            System.out.println("3 - Excluir");
+            System.out.println("4 - Exibir pelo ID");
+            System.out.println("5 - Exibir Todos");
+            System.out.println("0 - Finalizar Programa");
+            System.out.println("==============================");
+            System.out.print("Escolha uma opção: ");
 
-                opcao = scanner.nextInt();
-                scanner.nextLine();
+            opcao = scanner.nextInt();
 
-                switch (opcao) {
-                    case 1 -> incluirOpcao();
-                    case 2 -> alterarOpcao(scanner);
-                    case 3 -> excluirOpcao(scanner);
-                    case 4 -> exibirPorIdOpcao(scanner);
-                    case 5 -> exibirTodosOpcao();
-                    case 0 -> System.out.println("Finalizando programa...");
-                    default -> System.out.println("Opção inválida!");
-                }
-            } while (opcao != 0);
-        }
-    }
-
-    private static void exibirMenu() {
-        System.out.println("==============================");
-        System.out.println("1 - Incluir");
-        System.out.println("2 - Alterar");
-        System.out.println("3 - Excluir");
-        System.out.println("4 - Exibir pelo ID");
-        System.out.println("5 - Exibir Todos");
-        System.out.println("0 - Finalizar Programa");
-        System.out.println("==============================");
-        System.out.print("Escolha uma opção: ");
+            switch (opcao) {
+                case 1 -> incluirOpcao();
+                case 2 -> alterarOpcao(scanner);
+                case 3 -> excluirOpcao(scanner);
+                case 4 -> exibirPorIdOpcao(scanner);
+                case 5 -> exibirTodosOpcao();
+                case 0 -> System.out.println("Finalizando programa...");
+                default -> System.out.println("Opção inválida!");
+            }
+        } while (opcao != 0);
+        scanner.close();
     }
 
     private static void incluirOpcao() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Escolha o tipo de pessoa:");
-            System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
-            String tipoPessoa = scanner.nextLine().toUpperCase();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Escolha o tipo de pessoa:");
+        System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
+        String tipoPessoa = scanner.nextLine().toUpperCase();
 
-            switch (tipoPessoa) {
-                case "F" -> incluirPessoaFisica(scanner);
-                case "J" -> incluirPessoaJuridica(scanner);
-                default -> System.out.println("Opção inválida.");
-            }
+        switch (tipoPessoa) {
+            case "F" -> incluirPessoaFisica();
+            case "J" -> incluirPessoaJuridica();
+            default -> System.out.println("Opção inválida.");
         }
     }
 
-    private static void incluirPessoaFisica(Scanner scanner) {
+    private static void incluirPessoaFisica() {
         PessoaFisica pessoaFisica = new PessoaFisica();
+        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Nome: ");
         pessoaFisica.setNome(scanner.nextLine());
 
@@ -77,6 +73,9 @@ public class CadastroBDTeste {
         System.out.print("Telefone: ");
         pessoaFisica.setTelefone(scanner.nextLine());
 
+        System.out.print("Email: ");
+        pessoaFisica.setEmail(scanner.nextLine());
+
         System.out.print("Cpf: ");
         pessoaFisica.setCpf(scanner.nextLine());
 
@@ -84,8 +83,10 @@ public class CadastroBDTeste {
         System.out.println("Pessoa Física incluída com sucesso!");
     }
 
-    private static void incluirPessoaJuridica(Scanner scanner) {
+    private static void incluirPessoaJuridica() {
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
+        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Nome: ");
         pessoaJuridica.setNome(scanner.nextLine());
 
@@ -107,6 +108,9 @@ public class CadastroBDTeste {
         System.out.print("Telefone: ");
         pessoaJuridica.setTelefone(scanner.nextLine());
 
+        System.out.print("Email: ");
+        pessoaJuridica.setEmail(scanner.nextLine());
+
         System.out.print("Cnpj: ");
         pessoaJuridica.setCnpj(scanner.nextLine());
 
@@ -115,18 +119,69 @@ public class CadastroBDTeste {
     }
 
     private static void alterarOpcao(Scanner scanner) {
-        System.out.println("metodo alterarOpcao!");
-    }
+        System.out.println("Digite o ID do registro que deseja alterar:");
+        //int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Escolha o tipo de pessoa:");
+        System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
+        String tipoPessoa = scanner.nextLine().toUpperCase();
+
+        switch (tipoPessoa) {
+            case "F" -> alterarPessoaFisica();
+            case "J" -> alterarPessoaJuridica();
+            default -> System.out.println("Opção inválida.");
+        }
+}
+       private static void alterarPessoaFisica() {
+       }
+       private static void alterarPessoaJuridica() {
+       }
+
 
     private static void excluirOpcao(Scanner scanner) {
-        System.out.println("metodo excluirOpcao!");
+        System.out.println("Digite o ID do registro que deseja excluir:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Escolha o tipo de pessoa:");
+        System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
+        String tipoPessoa = scanner.nextLine().toUpperCase();
+
+        switch (tipoPessoa) {
+            case "F" -> excluirPessoaFisica();
+            case "J" -> excluirPessoaJuridica();
+            default -> System.out.println("Opção inválida.");
+        }
     }
+       private static void excluirPessoaFisica() {
+       }
+       private static void excluirPessoaJuridica() {
+       }
 
     private static void exibirPorIdOpcao(Scanner scanner) {
-        System.out.println("metodo exibirPorIdOpcao!");
-    }
+        System.out.println("Digite o ID do registro que deseja alterar:");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Escolha o tipo de pessoa:");
+        System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
+        String tipoPessoa = scanner.nextLine().toUpperCase();
 
-    private static void exibirTodosOpcao() {
-        // Implementar lógica para exibição de todos
+        switch (tipoPessoa) {
+            case "F" -> exibirPessoaFisica();
+            case "J" -> exibirPessoaJuridica();
+            default -> System.out.println("Opção inválida.");
+        }
     }
+       private static void exibirPessoaFisica() {
+       }
+       private static void exibirPessoaJuridica() {
+       }
+
+    private static void exibirTodosOpcao( ) {
+        System.out.println("Exibindo todas as pessos cadastradas:");
+
+        }
+       private static void exibirTodosPessoaFisica() {
+       }
+       private static void exibirTodosPessoaJuridica() {
+       }
 }
