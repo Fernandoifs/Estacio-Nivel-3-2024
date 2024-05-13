@@ -129,89 +129,81 @@ public class CadastroBDTeste {
         System.out.println("Pessoa Jurídica incluída com sucesso!");
     }
 
-
-    //precisa chamar o metodo de alterar de pesDao
     private static void alterarOpcao(Scanner scanner) {
-        System.out.println("Escolha o tipo de pessoa:");
-        System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
-        scanner.nextLine();
-        String tipoPessoa = scanner.nextLine().toUpperCase();
-
         System.out.print("ID: ");
         int id = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Recuperando os dados...");
 
-        if (tipoPessoa.equals("F")) {
-            PessoaFisica pessoaFisicaRecuperada = PessoaFisicaDAO.getPessoa(id);
-            if (pessoaFisicaRecuperada != null) {
-                pessoaFisicaRecuperada.exibir();
+        PessoaFisica pessoaFisicaRecuperada = PessoaFisicaDAO.getPessoa(id);
+        PessoaJuridica pessoaJuridicaRecuperada = PessoaJuridicaDAO.getPessoa(id);
 
-                System.out.println("Insira os dados...");
-                System.out.print("Nome: ");
-                String novoNome = scanner.nextLine();
-                System.out.print("Logradouro (ID): ");
-                int novoLogradouro = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Cidade (ID): ");
-                int novoCidade = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Estado (ID): ");
-                int novoEstado = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Telefone: ");
-                String novoTelefone = scanner.nextLine();
-                System.out.print("Email: ");
-                String novoEmail = scanner.nextLine();
-                System.out.print("CPF: ");
-                String novoCPF = scanner.nextLine();
+        if (pessoaFisicaRecuperada != null) {
+            pessoaFisicaRecuperada.exibir();
 
-                pessoaFisicaRecuperada.alterar();  metodo alterar de pessoa fisica dao
-                pessoaFisicaRecuperada.setLogradouro(novoLogradouro);
-                pessoaFisicaRecuperada.setCidade(novoCidade);
-                pessoaFisicaRecuperada.setEstado(novoEstado);
-                pessoaFisicaRecuperada.setTelefone(novoTelefone);
-                pessoaFisicaRecuperada.setEmail(novoEmail);
-                pessoaFisicaRecuperada.setCpf(novoCPF);
-                System.out.println("Dados atualizados com sucesso!");
-            } else {
-                System.out.println("Pessoa não encontrada!");
-            }
-        } else if (tipoPessoa.equals("J")) {
-            PessoaJuridica pessoaJuridicaRecuperada = PessoaJuridicaDAO.getPessoa(id);
-            if (pessoaJuridicaRecuperada != null) {
-                pessoaJuridicaRecuperada.exibir();
+            System.out.println("Insira os novos dados...");
+            System.out.print("Nome: ");
+            String novoNome = scanner.nextLine();
+            System.out.print("Logradouro (ID): ");
+            int novoLogradouro = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Cidade (ID): ");
+            int novoCidade = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Estado (ID): ");
+            int novoEstado = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Telefone: ");
+            String novoTelefone = scanner.nextLine();
+            System.out.print("Email: ");
+            String novoEmail = scanner.nextLine();
+            System.out.print("CPF: ");
+            String novoCPF = scanner.nextLine();
 
-                System.out.println("Insira os dados...");
-                System.out.print("Nome: ");
-                String novoNome = scanner.nextLine();
-                System.out.print("Logradouro (ID): ");
-                int novoLogradouro = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Cidade (ID): ");
-                int novoCidade = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Estado (ID): ");
-                int novoEstado = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Telefone: ");
-                String novoTelefone = scanner.nextLine();
-                System.out.print("Email: ");
-                String novoEmail = scanner.nextLine();
-                System.out.print("CNPJ: ");
-                String novoCNPJ = scanner.nextLine();
+            pessoaFisicaRecuperada.setNome(novoNome);
+            pessoaFisicaRecuperada.setLogradouro(novoLogradouro);
+            pessoaFisicaRecuperada.setCidade(novoCidade);
+            pessoaFisicaRecuperada.setEstado(novoEstado);
+            pessoaFisicaRecuperada.setTelefone(novoTelefone);
+            pessoaFisicaRecuperada.setEmail(novoEmail);
+            pessoaFisicaRecuperada.setCpf(novoCPF);
 
-                pessoaJuridicaRecuperada.setNome(novoNome);
-                pessoaJuridicaRecuperada.setLogradouro(novoLogradouro);
-                pessoaJuridicaRecuperada.setCidade(novoCidade);
-                pessoaJuridicaRecuperada.setEstado(novoEstado);
-                pessoaJuridicaRecuperada.setTelefone(novoTelefone);
-                pessoaJuridicaRecuperada.setEmail(novoEmail);
-                pessoaJuridicaRecuperada.setCnpj(novoCNPJ);
-                System.out.println("Dados atualizados com sucesso!");
-            } else {
-                System.out.println("Pessoa não encontrada!.");
-            }
+            PessoaFisicaDAO.alterar(pessoaFisicaRecuperada);
+            System.out.println("Dados atualizados com sucesso!");
+        } else if (pessoaJuridicaRecuperada != null) {
+            pessoaJuridicaRecuperada.exibir();
+
+            System.out.println("Insira os novos dados...");
+            System.out.print("Nome: ");
+            String novoNome = scanner.nextLine();
+            System.out.print("Logradouro (ID): ");
+            int novoLogradouro = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Cidade (ID): ");
+            int novoCidade = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Estado (ID): ");
+            int novoEstado = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Telefone: ");
+            String novoTelefone = scanner.nextLine();
+            System.out.print("Email: ");
+            String novoEmail = scanner.nextLine();
+            System.out.print("CNPJ: ");
+            String novoCNPJ = scanner.nextLine();
+
+            pessoaJuridicaRecuperada.setNome(novoNome);
+            pessoaJuridicaRecuperada.setLogradouro(novoLogradouro);
+            pessoaJuridicaRecuperada.setCidade(novoCidade);
+            pessoaJuridicaRecuperada.setEstado(novoEstado);
+            pessoaJuridicaRecuperada.setTelefone(novoTelefone);
+            pessoaJuridicaRecuperada.setEmail(novoEmail);
+            pessoaJuridicaRecuperada.setCnpj(novoCNPJ);
+
+            PessoaJuridicaDAO.alterar(pessoaJuridicaRecuperada);
+            System.out.println("Dados atualizados com sucesso!");
+        } else {
+            System.out.println("Pessoa não encontrada!");
         }
     }
 
@@ -225,41 +217,43 @@ public class CadastroBDTeste {
         int id = scanner.nextInt();
         scanner.nextLine();
 
-        if (tipoPessoa.equals("F")) {
-            PessoaFisica pessoaFisicaRecuperada = PessoaFisicaDAO.getPessoa(id);
-            if (pessoaFisicaRecuperada != null) {
-                pessoaFisicaRecuperada.exibir();
-
-                System.out.println("Deseja realmente excluir? Sim | Não");
-                String resposta = scanner.nextLine().toUpperCase();
-                if (resposta.equals("SIM")) {
-                    PessoaFisicaDAO.excluir(id);
-                    System.out.println("Dados excluídos com sucesso!");
-                }
-            } else {
-                System.out.println("Pessoa não encontrada!");
-            }
-        } else if (tipoPessoa.equals("J")) {
-            PessoaJuridica pessoaJuridicaRecuperada = PessoaJuridicaDAO.getPessoa(id);
-            if (pessoaJuridicaRecuperada != null) {
-                pessoaJuridicaRecuperada.exibir();
-
-                System.out.println("Deseja realmente excluir? Sim | Não");
-                String resposta = scanner.nextLine().toUpperCase();
-                if (resposta.equals("SIM")) {
-                    PessoaJuridicaDAO.excluir(id);
-                    System.out.println("Dados excluídos com sucesso!");
-                }
-            } else {
-                System.out.println("Pessoa não encontrada!");
-            }
-        } else {
-            System.out.println("Tipo de pessoa inválido!");
+        switch (tipoPessoa) {
+            case "F":
+                PessoaFisica pessoaFisicaRecuperada = PessoaFisicaDAO.getPessoa(id);
+                if (pessoaFisicaRecuperada != null) {
+                    pessoaFisicaRecuperada.exibir();
+                    
+                    System.out.println("Deseja realmente excluir? Sim | Não");
+                    String resposta = scanner.nextLine().toUpperCase();
+                    if (resposta.equals("SIM")) {
+                        PessoaFisicaDAO.excluir(id);
+                        System.out.println("Dados excluídos com sucesso!");
+                    }
+                } else {
+                    System.out.println("Pessoa não encontrada!");
+                }   break;
+            case "J":
+                PessoaJuridica pessoaJuridicaRecuperada = PessoaJuridicaDAO.getPessoa(id);
+                if (pessoaJuridicaRecuperada != null) {
+                    pessoaJuridicaRecuperada.exibir();
+                    
+                    System.out.println("Deseja realmente excluir? Sim | Não");
+                    String resposta = scanner.nextLine().toUpperCase();
+                    if (resposta.equals("SIM")) {
+                        PessoaJuridicaDAO.excluir(id);
+                        System.out.println("Dados excluídos com sucesso!");
+                    }
+                } else {
+                    System.out.println("Pessoa não encontrada!");
+                }   break;
+            default:
+                System.out.println("Tipo de pessoa inválido!");
+                break;
         }
     }
 
     private static void exibirPorIdOpcao(Scanner scanner) {
-        System.out.print("Digite o ID:");
+        System.out.print("Digite o ID: ");
         int id = scanner.nextInt();
         scanner.nextLine();
         PessoaFisica pessoaFisicaRecuperada = PessoaFisicaDAO.getPessoa(id);
