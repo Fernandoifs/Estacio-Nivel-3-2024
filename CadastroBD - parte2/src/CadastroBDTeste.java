@@ -1,9 +1,6 @@
 
 import cadastrobd.model.PessoaFisica;
 import cadastrobd.model.PessoaJuridica;
-import cadastrobd.model.Pessoa;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class CadastroBDTeste {
@@ -26,20 +23,13 @@ public class CadastroBDTeste {
             opcao = scanner.nextInt();
 
             switch (opcao) {
-                case 1 ->
-                    incluirOpcao();
-                case 2 ->
-                    alterarOpcao(scanner);
-                case 3 ->
-                    excluirOpcao(scanner);
-                case 4 ->
-                    exibirPorIdOpcao(scanner);
-                case 5 ->
-                    exibirTodosOpcao();
-                case 0 ->
-                    System.out.println("Finalizando programa...");
-                default ->
-                    System.out.println("Opção inválida!");
+                case 1 -> incluirOpcao();
+                case 2 -> alterarOpcao(scanner);
+                case 3 -> excluirOpcao(scanner);
+                case 4 -> exibirPorIdOpcao(scanner);
+                case 5 -> exibirTodosOpcao();
+                case 0 -> System.out.println("Finalizando programa...");
+                default -> System.out.println("Opção inválida!");
             }
         } while (opcao != 0);
         scanner.close();
@@ -52,12 +42,9 @@ public class CadastroBDTeste {
         String tipoPessoa = scanner.nextLine().toUpperCase();
 
         switch (tipoPessoa) {
-            case "F" ->
-                incluirPessoaFisica();
-            case "J" ->
-                incluirPessoaJuridica();
-            default ->
-                System.out.println("Opção inválida.");
+            case "F" -> incluirPessoaFisica();
+            case "J" -> incluirPessoaJuridica();
+            default -> System.out.println("Opção inválida.");
         }
     }
 
@@ -132,134 +119,69 @@ public class CadastroBDTeste {
     }
 
     private static void alterarOpcao(Scanner scanner) {
-    System.out.println("Escolha o tipo de pessoa:");
-    System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
-    scanner.nextLine();
-    String tipoPessoa = scanner.nextLine().toUpperCase();
-
-    System.out.print("ID: ");
-    int id = scanner.nextInt();
-    scanner.nextLine();
-    System.out.println("Recuperando os dados...");
-
-    if (tipoPessoa.equals("F")) {
-        Pessoa pessoaRecuperada = PessoaFisicaDAO.getPessoa(id);
-        atualizarDadosPessoa(scanner, pessoaRecuperada);
-    } else if (tipoPessoa.equals("J")) {
-        Pessoa pessoaRecuperada = PessoaJuridicaDAO.getPessoa(id);
-        atualizarDadosPessoa(scanner, pessoaRecuperada);
-    } else {
-        System.out.println("Tipo de pessoa inválido!");
-    }
-}
-
-private static void atualizarDadosPessoa(Scanner scanner, Pessoa pessoaRecuperada) {
-    if (pessoaRecuperada != null) {
-        pessoaRecuperada.exibir();
-
-        System.out.println("Insira os dados...");
-        System.out.print("Nome: ");
-        String novoNome = scanner.nextLine();
-        System.out.print("Logradouro (ID): ");
-        int novoLogradouro = scanner.nextInt();
+        System.out.println("Digite o ID do registro que deseja alterar:");
+        //int id = scanner.nextInt();
         scanner.nextLine();
-        System.out.print("Cidade (ID): ");
-        int novoCidade = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Estado (ID): ");
-        int novoEstado = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Telefone: ");
-        String novoTelefone = scanner.nextLine();
-        System.out.print("Email: ");
-        String novoEmail = scanner.nextLine();
-
-        pessoaRecuperada.setNome(novoNome);
-        pessoaRecuperada.setLogradouro(novoLogradouro);
-        pessoaRecuperada.setCidade(novoCidade);
-        pessoaRecuperada.setEstado(novoEstado);
-        pessoaRecuperada.setTelefone(novoTelefone);
-        pessoaRecuperada.setEmail(novoEmail);
-
-        if (pessoaRecuperada instanceof PessoaFisica) {
-            System.out.print("CPF: ");
-            String novoCPF = scanner.nextLine();
-            ((PessoaFisica) pessoaRecuperada).setCpf(novoCPF);
-        } else if (pessoaRecuperada instanceof PessoaJuridica) {
-            System.out.print("CNPJ: ");
-            String novoCNPJ = scanner.nextLine();
-            ((PessoaJuridica) pessoaRecuperada).setCnpj(novoCNPJ);
-        }
-
-        System.out.println("Dados atualizados com sucesso!");
-    } else {
-        System.out.println("Pessoa não encontrada!");
-    }
-}
-
-        private static void excluirOpcao(Scanner scanner) {
         System.out.println("Escolha o tipo de pessoa:");
         System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
-        scanner.nextLine();
         String tipoPessoa = scanner.nextLine().toUpperCase();
 
-        System.out.print("ID: ");
+        switch (tipoPessoa) {
+            case "F" -> alterarPessoaFisica();
+            case "J" -> alterarPessoaJuridica();
+            default -> System.out.println("Opção inválida.");
+        }
+}
+       private static void alterarPessoaFisica() {
+       }
+       private static void alterarPessoaJuridica() {
+       }
+
+
+    private static void excluirOpcao(Scanner scanner) {
+        System.out.println("Digite o ID do registro que deseja excluir:");
         int id = scanner.nextInt();
         scanner.nextLine();
+        System.out.println("Escolha o tipo de pessoa:");
+        System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
+        String tipoPessoa = scanner.nextLine().toUpperCase();
 
-        if (tipoPessoa.equals("F")) {
-            PessoaFisica pessoaFisicaRecuperada = PessoaFisicaDAO.getPessoa(id);
-            if (pessoaFisicaRecuperada != null) {
-                pessoaFisicaRecuperada.exibir();
-
-                System.out.println("Deseja realmente excluir? Sim | Não");
-                String resposta = scanner.nextLine().toUpperCase();
-                if (resposta.equals("SIM")) {
-                    PessoaFisicaDAO.excluir(id);
-                    System.out.println("Dados excluídos com sucesso!");
-                }
-            } else {
-                System.out.println("Pessoa não encontrada!");
-            }
-        } else if (tipoPessoa.equals("J")) {
-            PessoaJuridica pessoaJuridicaRecuperada = PessoaJuridicaDAO.getPessoa(id);
-            if (pessoaJuridicaRecuperada != null) {
-                pessoaJuridicaRecuperada.exibir();
-
-                System.out.println("Deseja realmente excluir? Sim | Não");
-                String resposta = scanner.nextLine().toUpperCase();
-                if (resposta.equals("SIM")) {
-                    PessoaJuridicaDAO.excluir(id);
-                    System.out.println("Dados excluídos com sucesso!");
-                }
-            } else {
-                System.out.println("Pessoa não encontrada!");
-            }
-        } else {
-            System.out.println("Tipo de pessoa inválido!");
+        switch (tipoPessoa) {
+            case "F" -> excluirPessoaFisica();
+            case "J" -> excluirPessoaJuridica();
+            default -> System.out.println("Opção inválida.");
         }
     }
+       private static void excluirPessoaFisica() {
+       }
+       private static void excluirPessoaJuridica() {
+       }
 
-    //-----------------------------------------------
     private static void exibirPorIdOpcao(Scanner scanner) {
-        System.out.print("Digite o ID: ");
+        System.out.println("Digite o ID do registro que deseja alterar:");
         int id = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Recuperando os dados...");
-        PessoaFisica pessoaFisicaRecuperada = PessoaFisicaDAO.getPessoa(id);
-        if (pessoaFisicaRecuperada != null) {
-            pessoaFisicaRecuperada.exibir();
-        } else {
-            System.out.println("Pessoa não encontrada!");
-        }
-    }
+        System.out.println("Escolha o tipo de pessoa:");
+        System.out.println("F - Pessoa Física | J - Pessoa Jurídica");
+        String tipoPessoa = scanner.nextLine().toUpperCase();
 
-    //-----------------------------------------------
-    private static void exibirTodosOpcao() {
-        System.out.println("Exibindo todas as pessos cadastradas:");
-        List<PessoaFisica> todasPessoas = PessoaFisicaDAO.getPessoas();
-        for (PessoaFisica pessoa : todasPessoas) {
-            pessoa.exibir();
+        switch (tipoPessoa) {
+            case "F" -> exibirPessoaFisica();
+            case "J" -> exibirPessoaJuridica();
+            default -> System.out.println("Opção inválida.");
         }
     }
+       private static void exibirPessoaFisica() {
+       }
+       private static void exibirPessoaJuridica() {
+       }
+
+    private static void exibirTodosOpcao( ) {
+        System.out.println("Exibindo todas as pessos cadastradas:");
+
+        }
+       private static void exibirTodosPessoaFisica() {
+       }
+       private static void exibirTodosPessoaJuridica() {
+       }
 }
