@@ -55,10 +55,10 @@ public class PessoaFisicaDAO {
         try {
             conn = ConectorBD.getConnection();
             String sql = """
-                         SELECT pes.idpessoa, pes.nome, pes.logradouro, pes.cidade, pes.estado, pes.telefone, pes.email, pef.cpf 
+                         SELECT pes.nome, pes.logradouro, pes.cidade, pes.estado, pes.telefone, pes.email, pef.cpf 
                          FROM pessoafisica pef 
                          INNER JOIN pessoa pes ON (pes.idpessoa = pef.idpessoa)
-                         WHERE pes.tipo = 'F'""";
+                         """;
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
@@ -134,6 +134,12 @@ public class PessoaFisicaDAO {
 
         try {
             conn = ConectorBD.getConnection();
+            String sqlPessoaFisica = "UPDATE PessoaFisica SET cpf=? WHERE idpessoa=?";
+            PreparedStatement stmt2 = conn.prepareStatement(sqlPessoaFisica);
+            stmt2.setString(1, pessoa.getCpf());
+            stmt2.setInt(2, pessoa.getId());
+            stmt2.executeUpdate();
+            
             String sqlPessoa = "UPDATE Pessoa SET nome=?, logradouro=?, cidade=?, estado=?, telefone=?, email=? WHERE idpessoa=?";
             stmt = conn.prepareStatement(sqlPessoa);
             stmt.setString(1, pessoa.getNome());
@@ -145,19 +151,12 @@ public class PessoaFisicaDAO {
             stmt.setInt(7, pessoa.getId());
             stmt.executeUpdate();
 
-            String sqlPessoaFisica = "UPDATE PessoaFisica SET cpf=? WHERE idpessoa=?";
-            PreparedStatement stmt2 = conn.prepareStatement(sqlPessoaFisica);
-            stmt2.setString(1, pessoa.getCpf());
-            stmt2.setInt(2, pessoa.getId());
-            stmt2.executeUpdate();
-
             ConectorBD.close(stmt2);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConectorBD.close(conn, stmt, null);
         }
-
     }
 
     public static void excluir(int idpessoa) {
