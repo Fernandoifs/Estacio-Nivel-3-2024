@@ -46,9 +46,7 @@ public class Pessoa {
     public int getLogradouro() {
         return logradouro;
     }
-    public void setLogradouro(int logradouro) {
-        this.logradouro = logradouro;
-    }
+    public void setLogradouro(int logradouro) {this.logradouro = logradouro;}
     public int getCidade() {
         return cidade;
     }

@@ -16,8 +16,8 @@ public class PessoaFisicaDAO {
         try {
             conn = ConectorBD.getConnection();
             String sql = """
-                         SELECT pes.nome, pes.logradouro, pes.cidade, pes.estado, pes.telefone, pes.email, pef.cpf 
-                         FROM pessoafisica pef 
+                         SELECT pes.nome, pes.logradouro, pes.cidade, pes.estado, pes.telefone, pes.email, pef.cpf\s
+                         FROM pessoafisica pef\s
                          INNER JOIN pessoa pes ON (pes.idpessoa = pef.idpessoa)
                          WHERE pes.idpessoa=?""";
 
@@ -55,10 +55,10 @@ public class PessoaFisicaDAO {
         try {
             conn = ConectorBD.getConnection();
             String sql = """
-                         SELECT pes.nome, pes.logradouro, pes.cidade, pes.estado, pes.telefone, pes.email, pef.cpf 
-                         FROM pessoafisica pef 
+                         SELECT pes.nome, pes.logradouro, pes.cidade, pes.estado, pes.telefone, pes.email, pef.cpf\s
+                         FROM pessoafisica pef\s
                          INNER JOIN pessoa pes ON (pes.idpessoa = pef.idpessoa)
-                         """;
+                        \s""";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
